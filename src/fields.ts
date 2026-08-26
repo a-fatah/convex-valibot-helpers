@@ -16,7 +16,7 @@ import {
   type AnyValibotSchema,
   valibotOutputToConvex,
   valibotToConvex,
-} from "./valibot-to-convex";
+} from "./valibot-to-convex.js";
 
 export type ValibotFields = Record<string, AnyValibotSchema>;
 

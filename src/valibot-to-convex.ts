@@ -175,7 +175,9 @@ function convertNode(
       return cv.array(convert(item, useOutput, visited)) as AnyConvexValidator;
     }
 
-    case "object": {
+    case "object":
+    case "strict_object":
+    case "loose_object": {
       const entries = (schema as v.ObjectSchema<v.ObjectEntries, undefined>).entries;
       const out: Record<string, AnyConvexValidator> = {};
       for (const [k, child] of Object.entries(entries)) {

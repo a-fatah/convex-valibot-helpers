@@ -11,7 +11,7 @@
 import * as v from "valibot";
 import type { GenericDataModel, TableNamesInDataModel } from "convex/server";
 import type { GenericId } from "convex/values";
-import { VID_TABLE } from "./valibot-to-convex";
+import { VID_TABLE } from "./valibot-to-convex.js";
 
 /** Branded Valibot schema that parses a string and converts to `cv.id(table)`.
  *  Input is bare `string` (what callers pass); output is `Id<TableName>` (what

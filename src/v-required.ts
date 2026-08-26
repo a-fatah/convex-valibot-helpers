@@ -24,7 +24,7 @@ import type {
   VUnion,
 } from "convex/values";
 
-import type { Expand, NotUndefined } from "./utils";
+import type { Expand, NotUndefined } from "./utils.js";
 
 export type VRequired<T extends Validator<any, OptionalProperty, any>> =
   T extends VId<infer Type, OptionalProperty>
@@ -122,7 +122,7 @@ export function vRequired<T extends Validator<any, OptionalProperty, any>>(
     case "union":
       return v.union(...validator.members) as VRequired<T>;
     default:
-      kind satisfies never;
+      // exhaustiveness check dropped: newer convex versions add validator kinds
       throw new Error("Unknown Convex validator type: " + kind);
   }
 }

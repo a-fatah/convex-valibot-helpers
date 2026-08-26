@@ -7,7 +7,7 @@
 // schemas package lets the frontend's read-side validation accept them.
 
 import * as v from "valibot";
-import { vid } from "./vid";
+import { vid } from "./vid.js";
 
 export function withSystemFields<
   Table extends string,

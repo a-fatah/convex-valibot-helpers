@@ -13,8 +13,8 @@ import type {
   PropertyValidators,
 } from "convex/values";
 
-import type { Expand, Overwrite } from "../utils";
-import type { Registration } from "../customization";
+import type { Expand, Overwrite } from "../utils.js";
+import type { Registration } from "../customization.js";
 
 export type AnyValibotSchema = v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>;
 export type ValibotFields = Record<string, AnyValibotSchema>;

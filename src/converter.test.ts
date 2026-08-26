@@ -17,7 +17,7 @@ import {
   valibotToConvexFields,
   vid,
   withSystemFields,
-} from "./index";
+} from "./index.js";
 
 // ── Per-kind dispatch ───────────────────────────────────────────────────────
 
@@ -214,5 +214,31 @@ describe("withSystemFields", () => {
     expect(cv._id?.kind).toBe("id");
     expect(cv._creationTime?.kind).toBe("float64");
     expect(cv.name?.kind).toBe("string");
+  });
+});
+
+// ── strictObject / looseObject ──────────────────────────────────────────────
+
+describe("strictObject / looseObject", () => {
+  test("strictObject with a nested strictObject converts like a plain object", () => {
+    const schema = v.strictObject({
+      name: v.string(),
+      nested: v.strictObject({ count: v.number() }),
+    });
+    const c = valibotToConvex(schema);
+    expect(c.kind).toBe("object");
+    expect(JSON.stringify(c)).not.toContain('"any"');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const fields = (c as any).fields;
+    expect(fields.name.kind).toBe("string");
+    expect(fields.nested.kind).toBe("object");
+    expect(fields.nested.fields.count.kind).toBe("float64");
+  });
+
+  test("looseObject converts like a plain object", () => {
+    const c = valibotToConvex(v.looseObject({ ok: v.boolean() }));
+    expect(c.kind).toBe("object");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((c as any).fields.ok.kind).toBe("boolean");
   });
 });

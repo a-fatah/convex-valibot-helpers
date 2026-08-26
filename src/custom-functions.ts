@@ -15,10 +15,10 @@ import type {
 } from "convex/server";
 import type { PropertyValidators } from "convex/values";
 
-import { customFnBuilder } from "./custom-fn-builder";
-import { NoOp, type Customization } from "./customization";
-import type { Overwrite } from "./utils";
-import type { CustomBuilder } from "./types/custom-builder";
+import { customFnBuilder } from "./custom-fn-builder.js";
+import { NoOp, type Customization } from "./customization.js";
+import type { Overwrite } from "./utils.js";
+import type { CustomBuilder } from "./types/custom-builder.js";
 
 export type { CustomBuilder };
 

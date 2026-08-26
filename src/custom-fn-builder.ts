@@ -11,12 +11,12 @@ import { ConvexError } from "convex/values";
 import type { Value } from "convex/values";
 import * as v from "valibot";
 
-import { addFieldsToValidator } from "./v-required";
-import { pick } from "./utils";
-import { valibotToConvexFields, type ValibotFields } from "./fields";
-import { valibotOutputToConvex, type AnyValibotSchema } from "./valibot-to-convex";
-import type { Customization } from "./customization";
-import { NoOp } from "./customization";
+import { addFieldsToValidator } from "./v-required.js";
+import { pick } from "./utils.js";
+import { valibotToConvexFields, type ValibotFields } from "./fields.js";
+import { valibotOutputToConvex, type AnyValibotSchema } from "./valibot-to-convex.js";
+import type { Customization } from "./customization.js";
+import { NoOp } from "./customization.js";
 
 /** Heuristic for "is this a Valibot schema instance?" Mirrors the
  *  `instanceof zCore.$ZodType` check on the Zod side. Valibot doesn't
