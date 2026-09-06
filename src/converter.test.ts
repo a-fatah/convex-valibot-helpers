@@ -18,6 +18,8 @@ import {
   vid,
   withSystemFields,
 } from "./index.js";
+import { v as cv } from "convex/values";
+import { vRequired } from "./v-required.js";
 
 // ── Per-kind dispatch ───────────────────────────────────────────────────────
 
@@ -240,5 +242,23 @@ describe("strictObject / looseObject", () => {
     expect(c.kind).toBe("object");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((c as any).fields.ok.kind).toBe("boolean");
+  });
+});
+
+describe("vRequired — commitTs (convex >=1.43)", () => {
+  test("an optional commitTs validator is made required, keeping its kind", () => {
+    const required = vRequired(cv.optional(cv.commitTs()));
+    expect(required.kind).toBe("commitTs");
+    expect(required.isOptional).toBe("required");
+  });
+
+  test("an already-required commitTs validator is returned as-is", () => {
+    const original = cv.commitTs();
+    expect(vRequired(original)).toBe(original);
+  });
+
+  test("no Valibot schema produces commitTs — a bigint is int64", () => {
+    // commitTs is a write-side placeholder, not a shape; see valibot-to-convex.ts.
+    expect(valibotToConvex(v.bigint()).kind).toBe("int64");
   });
 });

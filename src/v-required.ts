@@ -13,6 +13,7 @@ import type {
   VArray,
   VBoolean,
   VBytes,
+  VCommitTs,
   VFloat64,
   VId,
   VInt64,
@@ -35,6 +36,8 @@ export type VRequired<T extends Validator<any, OptionalProperty, any>> =
         ? VFloat64<NotUndefined<Type>, "required">
         : T extends VInt64<infer Type, OptionalProperty>
           ? VInt64<NotUndefined<Type>, "required">
+          : T extends VCommitTs<infer Type, OptionalProperty>
+            ? VCommitTs<NotUndefined<Type>, "required">
           : T extends VBoolean<infer Type, OptionalProperty>
             ? VBoolean<NotUndefined<Type>, "required">
             : T extends VNull<infer Type, OptionalProperty>
@@ -103,6 +106,10 @@ export function vRequired<T extends Validator<any, OptionalProperty, any>>(
       return v.float64() as VRequired<T>;
     case "int64":
       return v.int64() as VRequired<T>;
+    case "commitTs":
+      // convex >=1.43: accepts an int64 commit timestamp or the
+      // `db.vars.commitTs` placeholder (our peer range starts there).
+      return v.commitTs() as VRequired<T>;
     case "boolean":
       return v.boolean() as VRequired<T>;
     case "null":
@@ -122,7 +129,10 @@ export function vRequired<T extends Validator<any, OptionalProperty, any>>(
     case "union":
       return v.union(...validator.members) as VRequired<T>;
     default:
-      // exhaustiveness check dropped: newer convex versions add validator kinds
+      // Exhaustiveness check: when convex adds a validator kind, this line is
+      // the compile error that says so — keep it, don't drop it. Runtime throw
+      // stays as the belt to this suspender for untyped callers.
+      kind satisfies never;
       throw new Error("Unknown Convex validator type: " + kind);
   }
 }

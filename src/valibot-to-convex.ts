@@ -18,6 +18,11 @@
 //     they don't change runtime shape; a structural transform would not be.
 //   - Recursive schemas (`v.lazy(() => ...)`) collapse to `cv.any()` at the
 //     cycle point — Convex validators have no recursion.
+//   - No Valibot schema ever produces `cv.commitTs()` (convex >=1.43). It is
+//     a write-side placeholder for the upcoming commit timestamp, not a data
+//     shape; a Valibot bigint maps to `cv.int64()`, which is what a stored
+//     commit timestamp *is*. The kind exists only on the Convex → Convex side
+//     (`vRequired` handles it).
 
 import * as v from "valibot";
 import { v as cv, type Validator, type VObject, type PropertyValidators } from "convex/values";

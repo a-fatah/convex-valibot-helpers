@@ -1,6 +1,6 @@
 {
   "name": "convex-valibot-helpers",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "Valibot ↔ Convex bridge — convert Valibot schemas to Convex validators, plus Zod-style custom query/mutation/action builders.",
   "type": "module",
   "sideEffects": false,
@@ -41,11 +41,11 @@
     "lint": "bunx eslint ."
   },
   "peerDependencies": {
-    "convex": ">=1.0.0",
+    "convex": ">=1.43.0",
     "valibot": ">=1.0.0"
   },
   "devDependencies": {
-    "convex": ">=1.0.0",
+    "convex": "^1.45.0",
     "valibot": "^1.0.0",
     "typescript": "^5.8.2"
   }
