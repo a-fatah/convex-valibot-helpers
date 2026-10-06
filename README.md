@@ -5,9 +5,20 @@ A **Valibot ↔ Convex** bridge. Convert [Valibot](https://valibot.dev) schemas 
 actions whose argument validation is driven by Valibot — the same ergonomics the
 `convex-helpers` Zod integration gives you, but on Valibot.
 
+Published to GitHub Packages as `@a-fatah/convex-valibot-helpers`. Point the
+`@a-fatah` scope at that registry (an `.npmrc` with a token that can read
+packages), then install:
+
 ```bash
-bun add convex-valibot-helpers   # or: npm i convex-valibot-helpers
+# .npmrc
+# @a-fatah:registry=https://npm.pkg.github.com
+# //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+
+bun add @a-fatah/convex-valibot-helpers   # or: npm i @a-fatah/convex-valibot-helpers
 ```
+
+Pushing a `v*` tag that matches `package.json`'s version publishes it
+(`.github/workflows/publish.yml`).
 
 `convex` and `valibot` are peer dependencies — bring your own versions.
 
@@ -22,7 +33,7 @@ import {
   valibotToConvexFields,
   vCustomQuery,
   customCtx,
-} from "convex-valibot-helpers";
+} from "@a-fatah/convex-valibot-helpers";
 
 // 1. Convert a Valibot schema to a Convex validator
 const User = v.object({ name: v.string(), age: v.number() });

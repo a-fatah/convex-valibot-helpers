@@ -1,6 +1,6 @@
 {
-  "name": "convex-valibot-helpers",
-  "version": "0.2.1",
+  "name": "@a-fatah/convex-valibot-helpers",
+  "version": "0.2.2",
   "description": "Valibot ↔ Convex bridge — convert Valibot schemas to Convex validators, plus Zod-style custom query/mutation/action builders.",
   "type": "module",
   "sideEffects": false,
@@ -14,6 +14,9 @@
   "bugs": {
     "url": "https://github.com/a-fatah/convex-valibot-helpers/issues"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "keywords": [
     "convex",
     "valibot",
@@ -22,20 +25,22 @@
     "convex-helpers",
     "typescript"
   ],
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     }
   },
   "files": [
-    "src",
+    "dist",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "bun test",
     "lint": "bunx eslint ."
